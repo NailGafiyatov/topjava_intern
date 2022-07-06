@@ -29,13 +29,11 @@ public class UserMeal {
         return calories;
     }
 
-    //Возвращает число месяца приема пищи
-    public LocalDate toLocalDate() {
+    public LocalDate getDate() {
         return getDateTime().toLocalDate();
     }
 
-    //Возвращает час приема пищи
-    public LocalTime toLocalTime() {
+    public LocalTime getTime() {
         return getDateTime().toLocalTime();
     }
 
