@@ -36,7 +36,7 @@ public class UserMealsUtil {
         List<MealTo> mealsTo = new ArrayList<>();
         for (UserMeal meal : meals) {
             if (TimeUtil.isBetweenHalfOpen(meal.getTime(), startTime, endTime)) {
-                mealsTo.add(new MealTo(meal.getDateTime(), meal.getDescription(), meal.getCalories(), sumCaloriesOfDay.get(meal.getDate()) > caloriesPerDay));
+                mealsTo.add(createTo(meal, sumCaloriesOfDay.get(meal.getDate()) > caloriesPerDay));
             }
         }
         return mealsTo;
@@ -46,10 +46,9 @@ public class UserMealsUtil {
         Map<LocalDate, Integer> sumCaloriesOfDay = meals.stream()
                 .collect(Collectors.groupingBy(UserMeal::getDate, Collectors.summingInt(UserMeal::getCalories)));
 
-        return meals.stream().filter(meal ->
-                        TimeUtil.isBetweenHalfOpen(meal.getTime(), startTime, endTime))
-                .map(meal ->
-                        createTo(meal, sumCaloriesOfDay.get(meal.getDate()) > caloriesPerDay))
+        return meals.stream()
+                .filter(meal -> TimeUtil.isBetweenHalfOpen(meal.getTime(), startTime, endTime))
+                .map(meal -> createTo(meal, sumCaloriesOfDay.get(meal.getDate()) > caloriesPerDay))
                 .collect(Collectors.toList());
     }
 
