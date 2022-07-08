@@ -8,5 +8,8 @@
 <h3><a href="index.html">Home</a></h3>
 <hr>
 <h2>Users</h2>
+<table border="1">
+
+</table>
 </body>
 </html>
