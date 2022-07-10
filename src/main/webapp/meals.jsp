@@ -5,7 +5,7 @@
   Time: 14:12
   To change this template use File | Settings | File Templates.
 --%>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page contentType="text/html;charset=UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <html lang="ru">
@@ -25,17 +25,21 @@
         <th>Калории</th>
     </tr>
 
-    <jsp:useBean id="mealsTo" scope="request" type="java.util.List"/>
+
+    <%--@elvariable id="mealsTo" type="java.util.List"--%>
     <c:forEach items="${mealsTo}" var="mealTo">
         <tr style="background-color:${mealTo.excess ? 'red' : 'green'}">
             <td><c:out value="${mealTo.dateTime}"/></td>
             <td><c:out value="${mealTo.description}"/></td>
             <td><c:out value="${mealTo.calories}"/></td>
+            <td><a href="meals?action=update&Id=${mealTo.Id}">Update</a></td>
+            <td><a href="meals?action=delete&Id=${mealTo.Id}">Delete</a></td>
         </tr>
     </c:forEach>
 
 </table>
 <%--</c:if>--%>
 <p><a href="./">Home</a></p>
+<p><a href="meal.jsp">Create Meal</a></p>
 </body>
 </html>
